@@ -1,4 +1,4 @@
-package mx.com.edieltech.vepormascodechallenge.ui.theme
+package mx.com.edieltech.vepormascodechallenge.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
