@@ -1,4 +1,4 @@
-package mx.com.edieltech.vepormascodechallenge.presentation.common
+package mx.com.edieltech.vepormascodechallenge.presentation.common.composeext
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES

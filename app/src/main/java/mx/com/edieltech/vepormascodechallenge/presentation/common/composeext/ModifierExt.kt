@@ -1,4 +1,4 @@
-package mx.com.edieltech.vepormascodechallenge.presentation.common
+package mx.com.edieltech.vepormascodechallenge.presentation.common.composeext
 
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable

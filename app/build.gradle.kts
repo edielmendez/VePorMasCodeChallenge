@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.serialization)
+    kotlin("kapt")
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -64,6 +66,13 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     //
     implementation(libs.kotlinx.serialization.json)
+    //Dagger - Hilt
+    implementation(libs.dagger.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    //
+    implementation(libs.lifecycle.viewmodel.compose)
+    //
+    implementation(libs.hilt.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
