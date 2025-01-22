@@ -26,7 +26,8 @@ import mx.com.edieltech.vepormascodechallenge.presentation.ui.theme.VePorMasCode
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    navigateToDetailScreen: (String, String)-> Unit
 ){
     val context = LocalContext.current
 
@@ -37,7 +38,7 @@ fun HomeScreen(
         HomeScreenContent(
             photos = state.photos,
             onItemClick = {
-                //viewModel.setEvent(HomeEvent.DeletePhoto(it.id))
+                navigateToDetailScreen(it.title, it.thumbnailUrl)
             },
             onDeleteIconClick = {
                 viewModel.setEvent(HomeEvent.DeletePhoto(it))
