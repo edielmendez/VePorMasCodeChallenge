@@ -15,6 +15,7 @@ import mx.com.edieltech.vepormascodechallenge.domain.models.PhotoModel
 import mx.com.edieltech.vepormascodechallenge.presentation.common.composeext.ThemePreviews
 import mx.com.edieltech.vepormascodechallenge.presentation.designsystem.DefaultTopAppBar
 import mx.com.edieltech.vepormascodechallenge.presentation.screens.home.components.HomeShimmerScreen
+import mx.com.edieltech.vepormascodechallenge.presentation.screens.home.components.PhotosList
 import mx.com.edieltech.vepormascodechallenge.presentation.ui.theme.VePorMasCodeChallengeTheme
 
 @Composable
@@ -50,7 +51,15 @@ fun HomeScreenContent(
                 .padding(innerPadding),
             contentAlignment = Alignment.Center
         ){
-            Text(text = "Home Screen")
+            PhotosList(
+                photos = photos,
+                onItemClick = {
+
+                },
+                onDeleteIconClick = {
+
+                }
+            )
         }
     }
 }

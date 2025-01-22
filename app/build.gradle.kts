@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.serialization)
-    kotlin("kapt")
-    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -67,12 +68,22 @@ dependencies {
     //
     implementation(libs.kotlinx.serialization.json)
     //Dagger - Hilt
-    implementation(libs.dagger.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    //implementation(libs.dagger.hilt.android)
+    //kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.androidx.navigation.compose)
+    implementation(libs.hilt.android)
     //
     implementation(libs.lifecycle.viewmodel.compose)
     //
-    implementation(libs.hilt.navigation.compose)
+    //implementation(libs.hilt.navigation.compose)
+    //Retrofit
+    implementation(libs.squareup.retrofit2)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.okhttp3.logging.interceptor)
+    // Glide
+    implementation(libs.glide.compose)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
