@@ -4,5 +4,5 @@ import mx.com.edieltech.vepormascodechallenge.presentation.common.viewmodel.UiEv
 
 sealed interface HomeEvent: UiEvent {
     data object FetchPhotos: HomeEvent
-    data object DeletePhoto: HomeEvent
+    data class DeletePhoto(val id: Int): HomeEvent
 }

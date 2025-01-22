@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
             }
 
             is HomeEvent.DeletePhoto -> {
-
+                deletePhoto(event.id)
             }
         }
     }
@@ -71,6 +71,21 @@ class HomeViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    private fun deletePhoto(id: Int){
+        val photoToDelete = state.photos.find { it.id == id }
+        photoToDelete?.let { photo ->
+            setState {
+                copy(
+                    photos = state.photos.toMutableList().apply {
+                        remove(photo)
+                    }
+                )
+            }
+            setEffect { HomeEffect.ShowToast("${photo.title} Eliminado") }
+        }
+
     }
 
     private fun setLoading(isLoading: Boolean = true) {

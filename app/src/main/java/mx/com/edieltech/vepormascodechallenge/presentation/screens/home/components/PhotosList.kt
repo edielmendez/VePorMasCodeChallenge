@@ -90,8 +90,10 @@ fun PhotoItem(
             )*/
             Icon(
                 painter = painterResource(id = R.drawable.baseline_delete_24),
-                contentDescription = "Eliminar Foto", // Descripción accesible para el icono
-                modifier = Modifier.size(32.dp) // Cambiar el tamaño del ícono si es necesario
+                contentDescription = "Eliminar Foto",
+                modifier = Modifier.size(32.dp).clickable {
+                    onDeleteIconClick(photo.id)
+                }
             )
         }
     }
