@@ -1,8 +1,9 @@
 package mx.com.edieltech.vepormascodechallenge.data.remote.repository
 
-import android.util.Log
+
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import mx.com.edieltech.vepormascodechallenge.data.remote.AppService
@@ -22,17 +23,20 @@ class PhotosRepositoryImpl @Inject constructor(
     override fun fetchPhotos(): Flow<NetworkResult<List<PhotoModel>>> = flow {
         try {
             val response = service.fetchPhotos()
-            Log.v("PhotosRepositoryImpl", "${response}")
+
             if(response.isSuccessful){
-                Log.v("PhotosRepositoryImpl", "${response.body()}")
-                val photos = response.body()?.map { it.toPhotoModel() } ?: emptyList()
-                emit(NetworkResult.Success(photos))
+                response.body()?.let { body ->
+                    val photos = body.map { it.toPhotoModel() }
+                    emit(NetworkResult.Success(photos))
+                } ?: emit(NetworkResult.Success(emptyList()))
             }else{
                 emit(NetworkResult.Error(response.errorBody().toString()))
             }
         }catch (exception: Exception){
-            Log.v("PhotosRepositoryImpl", "${exception}")
             emit(NetworkResult.Error(error = exception.message ?: ""))
         }
+    }.flowOn(dispatcher)
+    .catch { exception ->
+        emit(NetworkResult.Error(exception.localizedMessage ?: "Unknown Error"))
     }
 }

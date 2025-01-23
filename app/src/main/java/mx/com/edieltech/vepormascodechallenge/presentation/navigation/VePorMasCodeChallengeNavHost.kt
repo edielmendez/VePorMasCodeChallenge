@@ -23,7 +23,9 @@ fun VePorMasCodeChallengeNavHost(
         composable<HomeRoute> { backStackEntry ->
             HomeScreen(
                  navigateToDetailScreen = { title, image ->
-                     navController.navigate(DetailRoute(title = title, image = image))
+                     navController.navigate(DetailRoute(title = title, image = image)){
+                         launchSingleTop = true
+                     }
                  }
             )
         }
@@ -32,9 +34,7 @@ fun VePorMasCodeChallengeNavHost(
             DetailScreen(
                 title = detailRoute.title,
                 image = detailRoute.image,
-                onButtonBackClick = {
-                    navController.popBackStack()
-                }
+                onButtonBackClick = navController::popBackStack
             )
         }
     }

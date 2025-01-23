@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,22 +28,35 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navigateToDetailScreen: (String, String)-> Unit
 ){
+
     val context = LocalContext.current
 
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    if(state.isLoading){
-        HomeShimmerScreen()
-    }else{
-        HomeScreenContent(
-            photos = state.photos,
-            onItemClick = {
-                navigateToDetailScreen(it.title, it.thumbnailUrl)
-            },
-            onDeleteIconClick = {
-                viewModel.setEvent(HomeEvent.DeletePhoto(it))
-            }
-        )
+
+    Scaffold(
+        topBar = {
+            DefaultTopAppBar(
+                title = "Photos"
+            )
+        }
+    ) { innerPadding ->
+
+        if(state.isLoading){
+            HomeShimmerScreen()
+        }else{
+            HomeScreenContent(
+                modifier = Modifier.padding(innerPadding),
+                photos = state.photos,
+                onItemClick = {
+                    navigateToDetailScreen(it.title, it.thumbnailUrl)
+                },
+                onDeleteIconClick = {
+                    viewModel.setEvent(HomeEvent.DeletePhoto(it))
+                }
+            )
+        }
     }
+
 
     LaunchedEffect(Unit) {
         viewModel.effect.collectLatest {
@@ -60,30 +72,21 @@ fun HomeScreen(
 
 @Composable
 fun HomeScreenContent(
+    modifier: Modifier = Modifier,
     photos: List<PhotoModel> = emptyList(),
     onItemClick: (PhotoModel) -> Unit,
     onDeleteIconClick: (Int) -> Unit
 ){
-
-    Scaffold(
-        topBar = {
-            DefaultTopAppBar(
-                title = "Photos"
-            )
-        }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
-        ){
-            PhotosList(
-                photos = photos,
-                onItemClick = onItemClick,
-                onDeleteIconClick = onDeleteIconClick
-            )
-        }
+    Box(
+        modifier = modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ){
+        PhotosList(
+            photos = photos,
+            onItemClick = onItemClick,
+            onDeleteIconClick = onDeleteIconClick
+        )
     }
 }
 

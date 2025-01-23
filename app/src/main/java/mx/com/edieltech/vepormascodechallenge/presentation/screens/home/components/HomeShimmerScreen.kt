@@ -21,17 +21,21 @@ import mx.com.edieltech.vepormascodechallenge.presentation.designsystem.DefaultT
 import mx.com.edieltech.vepormascodechallenge.presentation.ui.theme.VePorMasCodeChallengeTheme
 
 @Composable
-fun HomeShimmerScreen(){
+fun HomeShimmerScreen() {
     Scaffold(
         topBar = {
             DefaultTopAppBar(
-                title = ""
+                title = "",
+                leftIcon = null,
+                rightIcon = null,
             )
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize().padding(innerPadding)){
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(innerPadding)) {
             LazyColumn {
-                items(10){
+                items(10) {
                     DPHomeShimmerItem()
                 }
             }
@@ -40,14 +44,17 @@ fun HomeShimmerScreen(){
 }
 
 @Composable
-fun DPHomeShimmerItem(){
+fun DPHomeShimmerItem() {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 32.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 32.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(
-            modifier = Modifier.weight(0.3F)
+            modifier = Modifier
+                .weight(0.3F)
                 .height(40.dp)
                 .padding(end = 16.dp)
                 .shimmerEffect()
@@ -58,40 +65,12 @@ fun DPHomeShimmerItem(){
                 .shimmerEffect()
         )
     }
-    /*
-    Column(
-        modifier = modifier.fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Box(
-                modifier = Modifier
-                    .width(100.dp)
-                    .height(20.dp)
-                    .shimmerEffect()
-            )
-            Box(modifier = Modifier
-                .width(100.dp)
-                .height(20.dp)
-                .shimmerEffect()
-            )
-        }
-        Spacer(modifier = Modifier.height(24.dp))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(150.dp)
-                .shimmerEffect()
-        )
-    }*/
+
 }
 
 @ThemePreviews
 @Composable
-fun HomeShimmerScreenPrev(){
+fun HomeShimmerScreenPrev() {
     VePorMasCodeChallengeTheme {
         Surface {
             HomeShimmerScreen()
